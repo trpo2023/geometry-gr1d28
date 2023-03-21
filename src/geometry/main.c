@@ -8,17 +8,17 @@ int main(int argc, char *argv[])
     int capacity = i + 1;
     int cal;
     object = figure_init(capacity);
-    // if(argc < 2)
-    // {
-    //     fprintf(stderr, "Использование: %s имя_файла\n", argv[0]);
-    //     exit(EXIT_FAILURE);
-    // }
-    // if((geometry = fopen(argv[1], "r")) == NULL)
-    // {
-    //     fprintf(stderr, "Не удается открыть файл \"%s\"\n", argv[1]);
-    //     exit(EXIT_FAILURE);
-    // }
-    geometry = fopen("test.txt", "r");
+    if(argc < 2)
+    {
+        fprintf(stderr, "Использование: %s имя_файла\n", argv[0]);
+        exit(EXIT_FAILURE);
+    }
+    if((geometry = fopen(argv[1], "r")) == NULL)
+    {
+        fprintf(stderr, "Не удается открыть файл \"%s\"\n", argv[1]);
+        exit(EXIT_FAILURE);
+    }
+    //geometry = fopen("test.txt", "r");
     printf("Количество фигур для ввода: ");
     scanf("%d", &cal);
 
