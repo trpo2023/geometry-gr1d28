@@ -1,4 +1,7 @@
 *.txt
 *.o
+*.d
+*.a
+main
 hel.c
 *.out

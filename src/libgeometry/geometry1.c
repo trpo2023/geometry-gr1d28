@@ -52,7 +52,7 @@ void error_full(int num, int column, char *c, char *str)
 
 void process_circle(struct Object *gcircle, int num, char *str)
 {
-    char name[6], *key, number1[6], number2[6], rad[6];
+    char *name, *key, number1[6], number2[6], rad[6];
     char s, p, e;
     int i;
     float pi = 3.14;
@@ -60,22 +60,27 @@ void process_circle(struct Object *gcircle, int num, char *str)
     s = '(';
     p = ',';
     e = ')';
+    name = calloc(sizeof(char), 6);
     //step_in = ftell(geometry);
     for(i = 0; i < 6; i++)
-        name[i] = str[i];
+	name[i] = str[i];
+    /*{
+        if(str[i] == key[i])
+		continue;*/
     if((strcmp(name, key)) == 0)
     {
         sprintf(gcircle->name, "%s", name);
     }
-    else
-    {
-        i = 0;
-        while(name[i] == key[i])
-            i++;
-        error_locate(i + 1, str);
-        printf("Error at string %d, column %d: expected 'circle' or 'trinagle'\n", num, i + 1);
-        exit(EXIT_FAILURE);
-    }
+    	else
+    	{
+        	i = 0;
+        	while(name[i] == key[i])
+            		i++;
+        	error_locate(i + 1, str);
+        	printf("Error at string %d, column %d: expected 'circle' or 'trinagle'\n", num, i + 1);
+        	exit(EXIT_FAILURE);
+    	}
+    //}
 
     while(str[i] == ' ')
         i++;
@@ -145,6 +150,7 @@ void process_circle(struct Object *gcircle, int num, char *str)
         printf("Error at string %d, column %d: unexpected token\n", num, i + 1);
         exit(EXIT_FAILURE);
     }
+    free(name);
 
     gcircle->P = 2 * pi * gcircle->R;
     gcircle->S = pi * gcircle->R * gcircle->R;
@@ -152,7 +158,7 @@ void process_circle(struct Object *gcircle, int num, char *str)
 
 void process_trinagle(struct Object *trinagle, int num, char *str)
 {
-    char name[8], *key, number1_x[6], number1_y[6], number2_x[6], number2_y[6], number3_x[6], number3_y[6], number4_x[6], number4_y[6];
+    char *name, *key, number1_x[6], number1_y[6], number2_x[6], number2_y[6], number3_x[6], number3_y[6], number4_x[6], number4_y[6];
     char s, p, e;
     int i;
     float x1, x2, x3, pr;
@@ -161,7 +167,7 @@ void process_trinagle(struct Object *trinagle, int num, char *str)
     s = '(';
     p = ',';
     e = ')';
-
+    name = calloc(sizeof(char), 8);
     for(i = 0; i < 8; i++)
         name[i] = str[i];
     if((strcmp(name, key)) == 0)
@@ -351,6 +357,7 @@ void process_trinagle(struct Object *trinagle, int num, char *str)
         printf("Error at string %d, column %d: unexpected token\n", num, i + 1);
         exit(EXIT_FAILURE);
     }
+    free(name);
 
     x1 = sqrt(pow((trinagle->point1.number_x - trinagle->point2.number_x), 2) + pow((trinagle->point1.number_y - trinagle->point2.number_y), 2));
     x2 = sqrt(pow((trinagle->point2.number_x - trinagle->point3.number_x), 2) + pow((trinagle->point2.number_y - trinagle->point3.number_y), 2));
