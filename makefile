@@ -1,4 +1,4 @@
-CFLAGS = -Wall -Werror
+CFLAGS = -Wall -Werror -I src
 CPPFLAGS = -MMD
 MAINWAY = src/geometry/
 GEOMETRYWAY = src/libgeometry/
@@ -20,6 +20,6 @@ $(LYBRARYWAY)libgeometry.a: $(OBJECTWAY)geometry1.o
 $(OBJECTWAY)geometry1.o: $(GEOMETRYWAY)geometry1.c
 	gcc -c $(CFLAGS) $(CPPFLAGS) -o $@ $^ -lm
 
-clean: $(OBJECTWAY)*.o $(LYBRARYWAY)*.a
+clean: $(OBJECTWAY)*.o $(OBJECTWAY)*.d $(LYBRARYWAY)*.a
 	rm $^
 
