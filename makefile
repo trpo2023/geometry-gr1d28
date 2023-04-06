@@ -1,25 +1,33 @@
 CFLAGS = -Wall -Werror -I src
 CPPFLAGS = -MMD
+APP_NAME = main
 MAINWAY = src/geometry/
 GEOMETRYWAY = src/libgeometry/
 OBJECTWAY = obj/src/geometry/
-LYBRARYWAY = obj/src/libgeometry/
+LIBRARYWAY = obj/src/libgeometry/
+APP_PATH = $(BIN_DIR)/$(APP_NAME)
+BIN_DIR = bin
+
 -include main.d geometry1.d
 
-all:bin/main
+all:$(APP_PATH)
 
-bin/main: $(OBJECTWAY)main.o $(LYBRARYWAY)libgeometry.a
-	cc $(CFLAGS) $(CPPFLAGS)  -o $@ $^ -lm
+$(APP_PATH): $(OBJECTWAY)main.o $(LIBRARYWAY)libgeometry.a
+	cc $(CFLAGS) $(CPPFLAGS) -o $@ $^ -lm
 
 $(OBJECTWAY)main.o: $(MAINWAY)main.c
 	gcc -c $(CFLAGS) $(CPPFLAGS) -o $@ $^
 
-$(LYBRARYWAY)libgeometry.a: $(OBJECTWAY)geometry1.o
+$(LIBRARYWAY)libgeometry.a: $(LIBRARYWAY)geometry1.o
 	ar rcs $@ $^
 
-$(OBJECTWAY)geometry1.o: $(GEOMETRYWAY)geometry1.c
+$(LIBRARYWAY)geometry1.o: $(GEOMETRYWAY)geometry1.c
 	gcc -c $(CFLAGS) $(CPPFLAGS) -o $@ $^ -lm
 
-clean: $(OBJECTWAY)*.o $(OBJECTWAY)*.d $(LYBRARYWAY)*.a
-	rm $^
+clean:
+	$(RM) $(APP_PATH)
+	find obj -name '*.o' -exec $(RM) '{}' \;
+	find obj -name '*.d' -exec $(RM) '{}' \;
+	find obj -name '*.a' -exec $(RM) '{}' \;
+
 
