@@ -37,7 +37,8 @@ void print_object(struct Object object, int i)
         printf("S = %.4lf\n", object.S);
     } else if (strcmp(object.name, "triangle") == 0) {
         printf("%d. %s", i + 1, object.name);
-        printf(" ( ( %.1lf %.1lf , %.1lf %.1lf , %.1lf %.1lf , %.1lf %.1lf ) )\n",
+        printf(" ( ( %.1lf %.1lf , %.1lf %.1lf , %.1lf %.1lf , %.1lf %.1lf ) "
+               ")\n",
                object.point1.number_x,
                object.point1.number_y,
                object.point2.number_x,
