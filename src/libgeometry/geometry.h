@@ -21,6 +21,8 @@ struct Object* figure_init(int quantity);
 
 struct Object* figure_realloc(struct Object* object, int capacity);
 
+int char_number(char x);
+
 int name_figure(struct Object* figure, char* key, char* str, int* i, int mode);
 
 int punctuation(char mark, char* str, int* i);

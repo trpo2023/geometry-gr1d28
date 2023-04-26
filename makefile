@@ -47,4 +47,5 @@ $(TEST_OBJ_PATH)main.o: $(CTEST_PATH)main.c
 $(TEST_OBJ_PATH)parser_test.o: $(CTEST_PATH)parser_test.c
 	$(CC) -c $(TEST_CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ $^ -lm
 
-
+runtest:$(TEST_PATH)
+	./$(TEST_PATH)
