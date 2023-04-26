@@ -1,0 +1,8 @@
+*.txt
+*.o
+*.d
+*.a
+main
+main-test
+hel.c
+*.out
