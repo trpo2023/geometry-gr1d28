@@ -43,22 +43,22 @@ CTEST(correct_data, punctuation)
 
 CTEST(correct_data, double_value)
 {
-     int i;
-     double number_neg;
-     double number_pos;
-     char* key_neg = "-3.0 ";
-     char* key_pos = "2.593 ";
+    int i;
+    double number_neg;
+    double number_pos;
+    char* key_neg = "-3.0 ";
+    char* key_pos = "2.593 ";
 
-     i = 0;
-     int res_neg = double_value(&number_neg, key_neg, &i);
-     i = 0;
-     int res_pos = double_value(&number_pos, key_pos, &i);
+    i = 0;
+    int res_neg = double_value(&number_neg, key_neg, &i);
+    i = 0;
+    int res_pos = double_value(&number_pos, key_pos, &i);
 
-     ASSERT_DBL_NEAR_TOL(-3.0, number_neg, 1e-3);
-     ASSERT_DBL_NEAR_TOL(2.593, number_pos, 1e-3);
-     ASSERT_EQUAL(0, res_neg);
-     ASSERT_EQUAL(0, res_pos);
- }
+    ASSERT_DBL_NEAR_TOL(-3.0, number_neg, 1e-3);
+    ASSERT_DBL_NEAR_TOL(2.593, number_pos, 1e-3);
+    ASSERT_EQUAL(0, res_neg);
+    ASSERT_EQUAL(0, res_pos);
+}
 
 CTEST(correct_data, calculate_circle)
 {
